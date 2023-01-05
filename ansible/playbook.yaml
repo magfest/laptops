@@ -74,13 +74,3 @@
   any_errors_fatal: true
   roles:
     - freeipa_enroll
-
-- name: Laptop deployment setup
-  hosts:
-    - laptops
-  remote_user: root
-  become: true
-  gather_facts: true
-  any_errors_fatal: true
-  roles:
-    - laptop_images
