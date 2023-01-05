@@ -9,7 +9,6 @@ else
 fi
 
 url='https://github.com/magfest/laptops.git'
-echo "$FILE exists ... comfiguring from laptop repo"
 directory='/opt/laptops'
 requirements=${directory}/repo/ansible/requirements.yaml
 checkout=main
