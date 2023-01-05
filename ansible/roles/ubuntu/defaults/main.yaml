@@ -8,6 +8,7 @@ packages:
     - toilet
     - figlet
     - vim
+    - ack-grep
   apt_install_vm:
     - qemu-guest-agent
     - python3-virtualenv

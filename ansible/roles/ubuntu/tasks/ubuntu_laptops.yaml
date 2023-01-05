@@ -36,14 +36,10 @@
     mode: 0600
   with_items: "{{ wifi_creds }}"
 
-- name: WiFi credentials
-  ansible.builtin.template:
-    src: NMConnection.j2
-    dest: "/etc/NetworkManager/system-connections/{{ item.ssid }}.nmconnection"
-    owner: root
-    group: root
-    mode: 0600
-  with_items: "{{ wifi_creds }}"
+- name: Restart network
+  service:
+    name: NetworkManager
+    state: restarted
 
 - name: Reload nm connection files
   shell: nmcli connection reload
@@ -129,7 +125,7 @@
     update_cache: true
     cache_valid_time: 3600
     autoclean: true
-    autoremove: true
+    autoremove: trueg
 
 - name: Ping test box.
   shell: curl http://local-nebula.magevent.net
