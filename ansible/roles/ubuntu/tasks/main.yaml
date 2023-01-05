@@ -1,0 +1,40 @@
+---
+- include: locale.yaml
+  tags:
+    - locale
+    - laptops
+
+- include: packages.yaml
+  tags:
+    - packages
+    - laptops
+
+- include: network.yaml
+  tags:
+    - network
+
+- include: user.yaml
+  tags:
+    - user
+
+- include: rsyslog.yaml
+  tags:
+    - rsyslog-clients
+
+- include: firewall_rules.yaml
+  tags:
+    - firewall
+    - laptops
+
+- include: "etc_hosts.yaml"
+
+- include: mail.yaml
+  when: "'smtp' not in group_names"
+
+- include: timesyncd.yaml
+
+# The following should only run on laptops
+- include: ubuntu_laptops.yaml
+  tags:
+    - never
+    - laptops
