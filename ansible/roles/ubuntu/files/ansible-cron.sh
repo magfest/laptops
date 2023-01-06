@@ -11,7 +11,10 @@ fi
 url='https://github.com/magfest/laptops.git'
 directory='/opt/laptops'
 requirements=${directory}/repo/ansible/requirements.yaml
-checkout=main
+
+echo "refactor-wifi" > /opt/laptops/branch
+
+checkout="$(cat /opt/laptops/branch)"
 
 while ! ping -c1 google.com; do sleep 3; done
 
