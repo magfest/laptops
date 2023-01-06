@@ -1,0 +1,8 @@
+---
+packages:
+  - libxinerama-dev
+  - libxext-dev
+  - libx11-dev
+  - build-essential
+  - mesa-common-dev
+  - libglvnd-dev

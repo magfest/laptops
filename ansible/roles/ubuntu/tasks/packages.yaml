@@ -34,38 +34,14 @@
   retries: 5
   until: apt_upgrade is success
 
-- name: Install packages on VMs
+- name: Install packages
   ansible.builtin.apt:
-    name: "{{ packages.common + packages.apt_install_vm }}"
+    name: "{{ packages }}"
     install_recommends: false
     update_cache: true
     cache_valid_time: 3600
     autoclean: true
     autoremove: true
-  register: apt_install_vm
+  register: apt_install
   retries: 5
-  until: apt_install_vm is success
-  when:
-    - packages.apt_install_vm is defined
-    - packages.apt_install_vm is iterable
-    - packages.apt_install_vm | length > 0
-    - ansible_facts['virtualization_role'] == "guest"
-    - ansible_facts['virtualization_type'] == "kvm"
-
-- name: Install packages on LXC
-  ansible.builtin.apt:
-    name: "{{ packages.common + packages.apt_install_lxc }}"
-    install_recommends: false
-    update_cache: true
-    cache_valid_time: 3600
-    autoclean: true
-    autoremove: true
-  register: apt_install_lxc
-  retries: 5
-  until: apt_install_lxc is success
-  when:
-    - packages.apt_install_lxc is defined
-    - packages.apt_install_lxc is iterable
-    - packages.apt_install_lxc | length > 0
-    - ansible_facts['virtualization_role'] == "guest"
-    - ansible_facts['virtualization_type'] == "lxc"
+  until: apt_install

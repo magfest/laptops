@@ -27,30 +27,6 @@
   with_items:
     - { src: "policies.json", dest: "/etc/firefox/policies/policies.json" }
 
-- name: WiFi credentials
-  ansible.builtin.template:
-    src: NMConnection.j2
-    dest: "/etc/NetworkManager/system-connections/{{ item.ssid }}.nmconnection"
-    owner: root
-    group: root
-    mode: 0600
-  with_items: "{{ wifi_creds }}"
-
-- name: Restart network
-  service:
-    name: NetworkManager
-    state: restarted
-
-- name: Reload nm connection files
-  shell: nmcli connection reload
-
-- name: Disable NetworkManager MAC randomization
-  ansible.builtin.copy:
-    src: "disable_randmac.conf"
-    dest: "/etc/NetworkManager/conf.d/disable_randmac.conf"
-    owner: root
-    group: root
-    mode: 0644
 
 - name: Create dconf directory for background config
   ansible.builtin.file:
@@ -127,5 +103,3 @@
     autoclean: true
     autoremove: true
 
-- name: Ping test box.
-  shell: curl http://local-nebula.magevent.net
